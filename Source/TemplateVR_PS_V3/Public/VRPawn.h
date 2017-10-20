@@ -19,6 +19,10 @@ IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "GameFramework/Pawn.h"
 #include "VRPawn.generated.h"
 
+class UCapsuleComponent;
+class UCameraComponent;
+class UMotionControllerComponent;
+
 USTRUCT(BlueprintType)
 struct FGravityProperty {
 
@@ -55,6 +59,41 @@ class TEMPLATEVR_PS_V3_API AVRPawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	AVRPawn();
+
+	// Properties
+
+	// Enable gravity for this pawn
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR")
+		bool enableGravity;
+	
+	// Gravity variable
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR")
+		FGravityProperty gravityVariable;
+
+	// Oculus HMD location offset
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR")
+		FVector oculusLocationOffset;
+
+	// Capsule component
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+		UCapsuleComponent *capsuleCollision;
+
+	// Scene component
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+		USceneComponent *scene;
+
+	// Pawn camera
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+		UCameraComponent *camera;
+
+	// 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+		UMotionControllerComponent *motionLeftController;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+		UMotionControllerComponent *motionRightController;
+
+
 
 protected:
 	// Called when the game starts or when spawned
