@@ -23,6 +23,7 @@ class UCapsuleComponent;
 class UCameraComponent;
 class UMotionControllerComponent;
 
+
 USTRUCT(BlueprintType)
 struct FGravityProperty {
 
@@ -58,7 +59,7 @@ class TEMPLATEVR_PS_V3_API AVRPawn : public APawn
 
 public:
 	// Sets default values for this pawn's properties
-	AVRPawn();
+	AVRPawn(const class FObjectInitializer &PCIP);
 
 	// Properties
 
@@ -94,12 +95,18 @@ public:
 		UMotionControllerComponent *motionRightController;
 
 
+	//TODO set override method default pawn vr
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
+
+	// Sets default values for this pawn's properties
+
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
