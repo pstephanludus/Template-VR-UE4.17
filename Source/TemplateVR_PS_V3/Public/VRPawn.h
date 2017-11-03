@@ -32,23 +32,23 @@ struct FGravityProperty {
 
 		// Respond to uneven terrain - Gravity Must be enabled
 		UPROPERTY(EditAnywhere, Category = "VR")
-			bool respondToUnevenTerrain = false;
+		bool respondToUnevenTerrain = false;
 
-		// How fast the VR pawn will fall with gravity
-		UPROPERTY(EditAnywhere, Category = "VR")
-			float gravityStrength = 3.f;
+	// How fast the VR pawn will fall with gravity
+	UPROPERTY(EditAnywhere, Category = "VR")
+		float gravityStrength = 3.f;
 
-		// How far should the check for a floor be made
-		UPROPERTY(EditAnywhere, Category = "VR")
-			float floorTraceRange = 150.f;
+	// How far should the check for a floor be made
+	UPROPERTY(EditAnywhere, Category = "VR")
+		float floorTraceRange = 150.f;
 
-		// Minimum Z offset beffore terrain is considered uneven
-		UPROPERTY(EditAnywhere, Category = "VR")
-			float floorTraceTolerance = 3.f;
+	// Minimum Z offset beffore terrain is considered uneven
+	UPROPERTY(EditAnywhere, Category = "VR")
+		float floorTraceTolerance = 3.f;
 
-		// Direction where this VR pawn will fall
-		UPROPERTY(EditAnywhere, Category = "VR")
-			FVector gravityDirection = FVector(0.f, 0.f, 0.f);
+	// Direction where this VR pawn will fall
+	UPROPERTY(EditAnywhere, Category = "VR")
+		FVector gravityDirection = FVector(0.f, 0.f, 0.f);
 
 };
 
@@ -66,7 +66,7 @@ public:
 	// Enable gravity for this pawn
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR")
 		bool enableGravity;
-	
+
 	// Gravity variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR")
 		FGravityProperty gravityVariable;
@@ -96,15 +96,37 @@ public:
 
 
 	//TODO set override method default pawn vr
+	// Override default pawn vr values
+
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		void overridePawnValues(
+			float PawnBaseEyeHeight = 0.f,
+			float FOV = 110.f,
+			float CapsuleHalfHeight = 96.f,
+			float CapsuleRadius = 22.f,
+			FVector CapsuleRelativeLocation = FVector(0.f, 0.f, -110.f),
+			FVector SceneLocation = FVector(0.f, 0.f, -110.f),
+			FVector LeftControllerLocation = FVector(0.f, 0.f, 110.f),
+			FVector RightControllerLocation = FVector(0.f, 0.f, 110.f));
+
+	// Pawn Rotation - Useful for static mouse rotation during development
+	UFUNCTION(BluePrintCallable, Category = "VR")
+		void rotatePawn(float RotationRate, float XAxisInput, float YAxisInput);
+
+	// Check if hmd is worn
+	UFUNCTION(BluePrintCallable, Category = "VR")
+		bool isHMDWorn();
+
+	// Print debug message
+	UFUNCTION(BluePrintCallable, Category = "VR")
+		void printDebugMessage(FString Message, bool OverWriteExisting, float Duration, FColor Color);
 
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-
-	// Sets default values for this pawn's properties
+public:
 
 
 	// Called every frame
@@ -113,6 +135,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
-	
+private:
+
+	bool HitResult;
+
 };
