@@ -13,7 +13,6 @@ AVRPawn::AVRPawn(const class FObjectInitializer &PCIP):Super(PCIP)
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-
 	enableGravity = false;
 	
 	oculusLocationOffset = FVector(0.f, 0.f, 150.f);
@@ -171,6 +170,5 @@ void AVRPawn::Tick(float DeltaTime)
 void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
