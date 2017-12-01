@@ -85,6 +85,62 @@ public:
 
 	//
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR-Teleport Target Parameters")
-		FVector teleportTargetMeshOffset;
+		FVector teleportTargetMeshSpawnOffset;
+	
+	// If player should  marker rotation (use with custom marker rotation)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR-Teleport Target Parameters")
+		bool markerFaceRotation;
+
+	//
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR-Teleport Target Parameters")
+		FVector customMarkerRotation;
+
+	//
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR-Teleport Target Parameters")
+		UParticleSystem *teleportTargetParticle;
+
+	//
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR-Teleport Target Parameters")
+		FVector teleportTargetParticleScale;
+
+	//
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR-Teleport Target Parameters")
+		FVector teleportTargetParticlesSpawnOffset;
+
+	// Check to see if an active teleport mode is turned on
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR-Read Only")
+		bool isTeleporting;
+
+	// Show teleport arc trace
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		bool showTeleportArc();
+
+	// Show teleport ray trace
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		bool showTeleportRay();
+
+	// Hide teleport arc trace
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		bool hideTeleportArc();
+
+	// Hide teleport ray trace
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		bool hideTeleportRay();
+
+	// Show marker
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		bool showMarker();
+
+	// Move marker
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		bool moveMarker(EMoveDirectionEnum markerDirection=EMoveDirectionEnum::MOVE_FORWARD, int rate=25, FRotator customDirection=FRotator::ZeroRotator);
+
+	// Hide marker
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		bool hideMarker();
+
+	// 
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		bool teleportNow();
 
 };
